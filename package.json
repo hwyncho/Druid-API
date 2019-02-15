@@ -1,10 +1,14 @@
 {
   "name": "druid-api",
   "version": "0.0.1",
-  "description": "Druid API",
+  "description": "RESTful APIs for anonymous question board (Druid).",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hwyncho/Druid-API.git"
   },
   "author": "Hwiyeon Cho",
   "license": "ISC",
