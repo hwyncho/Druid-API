@@ -1,0 +1,17 @@
+{
+  "name": "druid-api",
+  "version": "0.0.1",
+  "description": "Druid API",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hwiyeon Cho",
+  "license": "ISC",
+  "devDependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.10",
+    "sf": "^0.2.0"
+  }
+}
