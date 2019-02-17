@@ -13,4 +13,6 @@ app.get("/api/read/:apiName", require(__dirname + "/routes/read"));
 app.put("/api/update/:apiName", require(__dirname + "/routes/update"));
 app.delete("/api/delete/:apiName", require(__dirname + "/routes/delete"));
 
-app.listen(port, () => { console.log("Server start."); });
+app.listen(port, () => {
+  console.log("Server start.");
+});

@@ -1,30 +1,28 @@
-const autoIncrement = require("mongoose-auto-increment");
 const mongoose = require("mongoose");
+const autoIncrement = require("mongoose-auto-increment");
 const sf = require("sf");
 
 const info = {
   crypt: {
-    "salt": "mysalt",
-    "iterations": 2048,
-    "length": 64,
-    "digest": "sha512"
+    salt: "mysalt",
+    iterations: 2048,
+    length: 64,
+    digest: "sha512",
   },
   db: {
-    "host": "127.0.0.1",
-    "port": 27017,
-    "dbName": "druid"
+    host: "127.0.0.1",
+    port: 27017,
+    dbName: "druid",
   },
-  subjects: ["dm", "al", "ds1", "ds2"]
-}
+  subjects: ["dm", "al", "ds1", "ds2"],
+};
 
 /* Database */
-const db = mongoose.createConnection(
-  sf("mongodb://{host}:{port}/{dbName}", info.db), { useNewUrlParser: true }
-);
-db.once("open", function () {
+const db = mongoose.createConnection(sf("mongodb://{host}:{port}/{dbName}", info.db), { useNewUrlParser: true });
+db.once("open", () => {
   console.log("MongoDB connected.");
 });
-db.on("error", function (err) {
+db.on("error", (err) => {
   console.log("MongoDB connect ERROR: ", err);
 });
 
@@ -46,10 +44,14 @@ const models = {
   dm: db.model("dm", dmSchema),
   al: db.model("al", alSchema),
   ds1: db.model("ds1", ds1Schema),
-  ds2: db.model("ds2", ds2Schema)
+  ds2: db.model("ds2", ds2Schema),
 };
 
 module.exports = (params) => {
-  if (params == "models") { return models; }
-  if (params == "info") { return info; }
+  if (params == "models") {
+    return models;
+  }
+  if (params == "info") {
+    return info;
+  }
 };
