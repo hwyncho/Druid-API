@@ -9,13 +9,18 @@ const router = express.Router();
 
 router.get("/api/read/docs", (req, res) => {
   const keys = Object.keys(req.query);
-  const projection = { id: 1, title: 1, date: 1 };
+  const projection = { id: 1, title: 1, date: 1, click: 1 };
 
   let subject = null;
   if (keys.includes("subject")) {
     subject = req.query.subject;
   } else {
     return res.status(400).json([]);
+  }
+
+  let skip = 0;
+  if (keys.includes("skip")) {
+    skip = parseInt(req.query.skip);
   }
 
   let limit = 10;
@@ -27,6 +32,7 @@ router.get("/api/read/docs", (req, res) => {
     models[subject]
       .find({}, projection)
       .sort({ date: -1 })
+      .skip(skip)
       .limit(limit)
       .exec((err, docs) => {
         if (err) {
@@ -60,7 +66,11 @@ router.get("/api/read/doc", (req, res) => {
 
   if (info.subjects.includes(subject)) {
     models[subject]
-      .findOneAndUpdate({ id: id }, { $inc: { click: 1 } }, { projection: projection })
+      .findOneAndUpdate(
+        { id: id },
+        { $inc: { click: 1 } },
+        { projection: projection }
+      )
       .exec((err, doc) => {
         if (err) {
           return res.status(500).json({});
